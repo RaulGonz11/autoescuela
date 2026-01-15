@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="autoescuela_profesor_tree_view">
+            <field name="name">autoescuela.profesor.tree</field>
+            <field name="model">autoescuela.profesor</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de Profesores">
+                    <field name="name" string="Nombre del profesor"/>
+                    <field name="dni" string="DNI del profesor"/>
+                    <field name="coche" string="Coche del profesor"/>
+                    <field name="matricula" string="Matrícula del coche"/>
+                    <field name="autoescuela_id" string="Autoescuela asignada"/>
+                    <field name="incorporacion" string="Fecha de incorporación"/>
+                    <field name="antiguedad" string="Antigüedad"/>
+                    <field name="alumno_ids" widget="many2many_tags" string="Alumnos del profesor"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="autoescuela_profesor_form_view">
+            <field name="name">autoescuela.profesor.form</field>
+            <field name="model">autoescuela.profesor</field>
+            <field name="arch" type="xml">
+                <form string="Ficha del Profesor">
+                    <sheet>
+                        <separator string="INFORMACIÓN GENERAL"/>
+                        <group>
+                            <group>
+                                <field name="name" string="Nombre del profesor"/>
+                                <field name="dni" string="DNI del profesor"/>
+                                <field name="coche" string="Coche del profesor"/>
+                                <field name="matricula" string="Matrícula del coche"/>
+                                <field name="autoescuela_id" string="Autoescuela asignada"/>
+                                <field name="incorporacion" string="Fecha de incorporación"/>
+                                <field name="antiguedad" string="Antigüedad"/>
+                            </group>
+                            <group>
+                                <field name="alumno_ids" widget="many2many_tags" string="Alumnos del profesor" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

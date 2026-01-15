@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_autoescuela_examen" model="ir.actions.report">
+        <field name="name">Informe de Examen</field>
+        <field name="model">autoescuela.examen</field>
+        <field name="report_type">qweb-pdf</field> 
+        <field name="report_name">autoescuela.report_examen_template</field>
+        <field name="report_file">autoescuela.report_examen_template</field>
+        <field name="binding_model_id" ref="model_autoescuela_examen"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_examen_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Detalle de Examen: <span t-field="o.name"/></h2>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Fecha: </strong><span t-field="o.fecha"/><br/>
+                                <strong>Precio: </strong>
+                                <t t-if="o.moneda_id">
+                                    <span t-field="o.precio" t-options='{"widget": "monetary", "display_currency": o.moneda_id}'/>
+                                </t>
+                                <t t-else="">
+                                    <span t-out="o.precio"/> <span>(Sin moneda asignada)</span>
+                                </t>
+                                <br/>
+                                <strong>Nº Clases: </strong><span t-field="o.clases"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Tipo de Carnet: </strong><span t-field="o.carnet"/><br/>
+                                <strong>¿Aprobado?: </strong>
+                                <span t-if="o.aprobado">SÍ</span><span t-else="">NO</span><br/>
+                                <strong>Alumno: </strong><span t-field="o.alumno_id.name"/>
+                            </div>
+                        </div>
+                        
+                        <h3 class="mt-4">Autoescuelas Asociadas</h3>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr><th>Nombre</th><th>Localidad</th><th>Contacto</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.autoescuela_ids" t-as="ae">
+                                    <td><span t-field="ae.name"/></td>
+                                    <td><span t-field="ae.localidad"/></td>
+                                    <td><span t-field="ae.contacto"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

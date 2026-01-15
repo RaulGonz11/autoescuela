@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_autoescuela_alumno_html" model="ir.actions.report">
+        <field name="name">Informe de Alumno (Vista Web)</field>
+        <field name="model">autoescuela.alumno</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">autoescuela.report_alumno_template_html</field>
+        <field name="report_file">autoescuela.report_alumno_template_html</field>
+        <field name="binding_model_id" ref="model_autoescuela_alumno"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_alumno_template_html">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Ficha del Alumno (Vista Web)</h2>
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <strong>Nombre: </strong><span t-field="o.name"/><br/>
+                                <strong>DNI: </strong><span t-field="o.dni"/><br/>
+                                <strong>Matrícula: </strong><span t-field="o.matricula"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="autoescuela_alumno_tree_view">
+            <field name="name">autoescuela.alumno.tree</field>
+            <field name="model">autoescuela.alumno</field>
+            <field name="arch" type="xml">
+                <tree string="Listado de Alumnos">
+                    <field name="name" string="Nombre del alumno"/>
+                    <field name="dni" string="DNI del alumno"/>
+                    <field name="domicilio" string="Contacto"/>
+                    <field name="matricula" string="Número de matrícula"/>
+                    <field name="autoescuela_id" string="Autoescuela"/>
+                    <field name="profesor_id" string="Profesor habitual"/>
+                    <field name="examen_ids" widget="many2many_tags" string="Exámenes"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="autoescuela_alumno_form_view">
+            <field name="name">autoescuela.alumno.form</field>
+            <field name="model">autoescuela.alumno</field>
+            <field name="arch" type="xml">
+                <form string="Ficha del Alumno">
+                    <sheet>
+                        <separator string="INFORMACIÓN GENERAL"/>
+                        <group>
+                            <group>
+                                <field name="name" string="Nombre del alumno"/>
+                                <field name="dni" string="DNI del alumno"/>
+                                <field name="domicilio" string="Contacto"/>
+                                <field name="matricula" string="Número de matrícula"/>
+                                <field name="autoescuela_id" string="Autoescuela"/>
+                                <field name="profesor_id" string="Profesor habitual"/>
+                            </group>
+                            <group>
+                                <field name="examen_ids" widget="many2many_tags" string="Exámenes" readonly="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

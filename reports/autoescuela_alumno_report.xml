@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_autoescuela_alumno" model="ir.actions.report">
+        <field name="name">Informe de Alumno</field>
+        <field name="model">autoescuela.alumno</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">autoescuela.report_alumno_template</field>
+        <field name="report_file">autoescuela.report_alumno_template</field>
+        <field name="print_report_name">'Informe_%s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_autoescuela_alumno"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_alumno_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Ficha del Alumno</h2>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Nombre: </strong><span t-field="o.name"/><br/>
+                                <strong>DNI: </strong><span t-field="o.dni"/><br/>
+                                <strong>Matrícula: </strong><span t-field="o.matricula"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Autoescuela: </strong><span t-field="o.autoescuela_id.name"/><br/>
+                                <strong>Profesor: </strong><span t-field="o.profesor_id.name"/><br/>
+                                <strong>Domicilio: </strong><span t-field="o.domicilio"/>
+                            </div>
+                        </div>
+                        <h3 class="mt-4">Exámenes Realizados</h3>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Fecha</th>
+                                    <th>Carnet</th>
+                                    <th>Aprobado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.examen_ids" t-as="examen">
+                                    <tr>
+                                        <td><span t-field="examen.name"/></td>
+                                        <td><span t-field="examen.fecha"/></td>
+                                        <td><span t-field="examen.carnet"/></td>
+                                        <td>
+                                            <span t-if="examen.aprobado">SÍ</span>
+                                            <span t-else="">NO</span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

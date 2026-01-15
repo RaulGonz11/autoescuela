@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_autoescuela_profesor_html" model="ir.actions.report">
+        <field name="name">Informe de Profesor (Vista Web)</field>
+        <field name="model">autoescuela.profesor</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">autoescuela.report_profesor_template_html</field>
+        <field name="report_file">autoescuela.report_profesor_template_html</field>
+        <field name="binding_model_id" ref="model_autoescuela_profesor"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_profesor_template_html">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Ficha del Profesor</h2>
+                        <p><strong>Nombre: </strong><span t-field="o.name"/></p>
+                        <p><strong>Antigüedad: </strong><span t-field="o.antiguedad"/> años</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="autoescuela_examen_tree_view">
+        <field name="name">autoescuela.examen.tree</field>
+        <field name="model">autoescuela.examen</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="fecha"/>
+                <field name="alumno_id"/>
+                <field name="carnet"/>
+                <field name="aprobado"/>
+                <field name="autoescuela_ids" widget="many2many_tags" string="Autoescuelas Asociadas"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="autoescuela_examen_form_view">
+        <field name="name">autoescuela.examen.form</field>
+        <field name="model">autoescuela.examen</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <separator string="INFORMACIÓN GENERAL"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="fecha"/>
+                            <field name="precio"/>
+                            <field name="moneda_id"/>
+                        </group>
+                        <group>
+                            <field name="clases"/>
+                            <field name="carnet"/>
+                            <field name="aprobado"/>
+                            <field name="alumno_id"/>
+                        </group>
+                    </group>
+                    <group string="Autoescuelas Asociadas">
+                        <field name="autoescuela_ids" widget="many2many_tags" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="autoescuela_examen_calendar_view">
+        <field name="name">autoescuela.examen.calendar</field>
+        <field name="model">autoescuela.examen</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendario de Exámenes" date_start="fecha" color="carnet" mode="month">
+                <field name="name"/>
+                <field name="carnet"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="autoescuela_examen_search_view">
+        <field name="name">autoescuela.examen.search</field>
+        <field name="model">autoescuela.examen</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="carnet"/>
+                <filter name="group_by_carnet" string="Agrupar por Carnet" context="{'group_by': 'carnet'}"/>
+            </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="module_category_autoescuela" model="ir.module.category">
+            <field name="name">Autoescuela</field>
+            <field name="description">Categoría para el módulo de autoescuela</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="group_autoescuela_gestor" model="res.groups">
+            <field name="name">Gestor</field>
+            <field name="category_id" ref="module_category_autoescuela"/>
+            <field name="comment">Usuarios para gestionar alumnos, profesores y exámenes.</field>
+        </record>
+
+        <record id="group_autoescuela_director" model="res.groups">
+            <field name="name">Director</field>
+            <field name="category_id" ref="module_category_autoescuela"/>
+            <field name="comment">Usuarios para gestionar los datos de la autoescuela.</field>
+            <field name="implied_ids" eval="[(4, ref('group_autoescuela_gestor'))]"/>
+        </record>
+    </data>
+</odoo>
